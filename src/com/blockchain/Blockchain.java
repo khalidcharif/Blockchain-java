@@ -1,6 +1,5 @@
 package com.blockchain;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,10 @@ public class Blockchain {
 		return blockchain;
 	}
 	
+	public int getSizeBlockchain() {
+		return blockchain.size();
+	}
+	
 	private Block getLatestBlock() {
 		if(blockchain.isEmpty()) {
 			createGenesisBlock();
@@ -19,7 +22,7 @@ public class Blockchain {
 	}
 	
 	private void createGenesisBlock() {
-			blockchain.add(new Block(0, "0", "first block"));
+			blockchain.add(new Block(0, "0", "0"));
 	}
 	
 	public void addBlock(String data) {
@@ -30,7 +33,16 @@ public class Blockchain {
 	}
 	
 	public boolean isChainValid() {
-		
+		for(int i=1; i<blockchain.size(); i++) {
+			Block currentBlock = blockchain.get(i);
+			Block previousBlock = blockchain.get(i-1);
+			if(currentBlock.getHash().equals(previousBlock.calculateTheHash()))
+				return false;
+			if(currentBlock.getPreviousHash().equals(previousBlock.getHash())) 
+				return false;
+			
+		}
+		return true;
 	}
 
 }

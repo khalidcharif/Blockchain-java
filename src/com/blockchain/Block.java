@@ -75,6 +75,13 @@ public class Block {
 		}
 		return hexString.toString(); 
 	}
+
+	@Override
+	public String toString() {
+		return "The "+ index + "th Block [index=" + index + ", timestamp=" + timestamp + ", data=" + data + ", previousHash="
+				+ previousHash + ", Hash=" + Hash + "]";
+	}
+	
 	
 
 }
