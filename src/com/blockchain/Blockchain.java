@@ -22,7 +22,7 @@ public class Blockchain {
 	}
 	
 	private void createGenesisBlock() {
-			blockchain.add(new Block(0, "0", "0"));
+			blockchain.add(new Block(0, "100", "0"));
 	}
 	
 	public void addBlock(String data) {
@@ -36,9 +36,9 @@ public class Blockchain {
 		for(int i=1; i<blockchain.size(); i++) {
 			Block currentBlock = blockchain.get(i);
 			Block previousBlock = blockchain.get(i-1);
-			if(currentBlock.getHash().equals(previousBlock.calculateTheHash()))
+			if(!currentBlock.getHash().equals(currentBlock.calculateTheHash()))
 				return false;
-			if(currentBlock.getPreviousHash().equals(previousBlock.getHash())) 
+			if(!currentBlock.getPreviousHash().equals(previousBlock.getHash())) 
 				return false;
 			
 		}
